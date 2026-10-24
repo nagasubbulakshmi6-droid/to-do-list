@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Taskly - Dashboard</title>
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='dashboard.css') }}?v=2">
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+    <!-- ================================
+         HEADER
+    ================================= -->
+
+    <div class="header">
+
+        <div class="brand">
+
+            <div class="logo">
+                ✓
+            </div>
+
+            <div>
+
+                <h1>Taskly</h1>
+
+                <p class="welcome">
+                    Welcome back, {{ username }} 👋
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================
+         STATISTICS
+    ================================= -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <p>📋 Total Tasks</p>
+
+            <h2>
+                {{ total_tasks }}
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <p>⏳ Pending</p>
+
+            <h2>
+                {{ pending_tasks }}
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <p>✅ Completed</p>
+
+            <h2>
+                {{ completed_tasks }}
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================
+         PRODUCTIVITY PROGRESS
+    ================================= -->
+<div class="progress-card">
+
+    <div class="progress-info">
+
+        <div>
+            <p>Today's Productivity</p>
+            <h2>Keep going! 🚀</h2>
+        </div>
+
+        <div class="progress-number">
+            {{ progress }}%
+        </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+        <div class="progress-fill"
+             style="width: {{ progress }}%;">
+        </div>
+
+    </div>
+
+    <p class="progress-text">
+
+        {% if completed_tasks == total_tasks and total_tasks > 0 %}
+
+            🎉 Amazing! You've completed everything!
+
+        {% elif completed_tasks > 0 %}
+
+            You're making great progress. Keep it up!
+
+        {% else %}
+
+            Start completing your tasks to build your progress.
+
+        {% endif %}
+
+    </p>
+
+</div>
+    <!-- ================================
+         MAIN TASK CARD
+    ================================= -->
+
+    <div class="main-card">
+
+        <h2>
+            📝 My Tasks
+        </h2>
+
+
+        <!-- ADD TASK -->
+
+        <form
+            method="POST"
+            action="/add_task"
+            class="task-input">
+
+            <input
+                type="text"
+                name="task"
+                placeholder="What do you need to do?"
+                required>
+
+
+            <input
+                type="hidden"
+                name="username"
+                value="{{ username }}">
+
+
+            <button
+                type="submit"
+                class="add-btn">
+
+                + Add Task
+
+            </button>
+
+        </form>
+
+
+
+        <!-- TASK HEADING -->
+
+        <h2 class="task-heading">
+
+            Today's Tasks
+
+        </h2>
+
+
+
+        <!-- PAGE BUTTONS -->
+
+        <div class="page-actions">
+
+            <a
+                href="/completed/{{ username }}"
+                class="completed-page-btn">
+
+                ✅ Completed Tasks
+
+            </a>
+
+
+            <a
+                href="/profile/{{ username }}"
+                class="profile-page-btn">
+
+                👤 My Profile
+
+            </a>
+
+
+            <a
+                href="/logout"
+                class="logout-btn">
+
+                🚪 Logout
+
+            </a>
+
+        </div>
+
+
+
+        <!-- TASK LIST -->
+
+        <div class="task-list">
+
+
+            {% if tasks %}
+
+
+                {% for task in tasks %}
+
+
+                    <div class="task-item">
+
+
+                        <div class="task-info">
+
+
+                            <span
+                                class="task-name
+                                {% if task[2] == 'Completed' %}
+                                    completed
+                                {% endif %}">
+
+                                {{ task[1] }}
+
+                            </span>
+
+
+                            <span
+                                class="task-status
+                                {% if task[2] == 'Completed' %}
+                                    completed-status
+                                {% endif %}">
+
+                                {{ task[2] }}
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <!-- TASK ACTIONS -->
+
+                        <div class="task-actions">
+
+
+                            {% if task[2] != 'Completed' %}
+
+
+                                <a
+                                    href="/complete_task/{{ task[0] }}/{{ username }}"
+                                    class="complete-btn"
+                                    title="Complete task">
+
+                                    ✓
+
+                                </a>
+
+
+                            {% endif %}
+
+
+
+                            <a
+                                href="/delete_task/{{ task[0] }}/{{ username }}"
+                                class="delete-btn"
+                                title="Delete task">
+
+                                🗑
+
+                            </a>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <div class="empty">
+
+                    📝
+
+                    <br><br>
+
+                    No tasks yet.
+
+                    <br>
+
+                    Add your first task above!
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
+```

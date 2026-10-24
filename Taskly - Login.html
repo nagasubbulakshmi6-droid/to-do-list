@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Taskly - Login</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Left Side -->
+        <div class="welcome-section">
+
+            <div class="logo">
+                ✓
+            </div>
+
+            <h1>Taskly</h1>
+
+            <h2>Organize your day.<br>Achieve your goals.</h2>
+
+            <p>
+                Keep track of your tasks, stay productive
+                and make every day count.
+            </p>
+
+        </div>
+
+
+        <!-- Right Side -->
+        <div class="login-section">
+
+            <div class="login-box">
+
+                <h2>Welcome Back!</h2>
+
+                <p class="subtitle">
+                    Login to continue to your tasks
+                </p>
+
+
+                <form method="POST">
+
+                    <!-- Username -->
+                    <div class="input-group">
+
+                        <label>Username</label>
+
+                        <div class="input-wrapper">
+
+                            <span class="icon">👤</span>
+
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="Enter your username"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div class="input-group">
+
+                        <label>Password</label>
+
+                        <div class="input-wrapper">
+
+                            <span class="icon">🔒</span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                onclick="togglePassword()">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Remember -->
+                    <div class="options">
+
+                        <label class="remember">
+
+                            <input type="checkbox">
+
+                            <span>Remember me</span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Login Button -->
+                    <button
+                        type="submit"
+                        class="login-button">
+
+                        Login →
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
